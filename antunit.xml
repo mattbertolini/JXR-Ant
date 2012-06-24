@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2012 Matt Bertolini
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<project name="jxr-unit-tests" basedir="." xmlns:au="antlib:org.apache.ant.antunit" xmlns:jxr="antlib:com.mattbertolini.jxr.ant">
+    <property file="build.properties"/>
+
+    <path id="jxr-unittest-classpath">
+        <path location="${build.classes.dir}"/>
+        <path location="${build.resources.dir}"/>
+        <fileset dir="${lib.default.dir}"/>
+    </path>
+
+    <target name="setUp">
+        <taskdef resource="com/mattbertolini/jxr/ant/antlib.xml" uri="antlib:com.mattbertolini.jxr.ant" classpathref="jxr-unittest-classpath"/>
+        <mkdir dir="${build.unittest.dest.dir}"/>
+    </target>
+
+    <target name="tearDown">
+        <delete dir="${build.unittest.dest.dir}"/>
+    </target>
+
+    <target name="testSuccessfulBuild">
+        <jxr:jxr destdir="${build.unittest.dest.dir}" sourcepath="${src.test.java.dir}"/>
+        <au:assertFileExists file="${build.unittest.dest.dir}/index.html"/>
+        <au:assertFileExists file="${build.unittest.dest.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${build.unittest.dest.dir}/com/mattbertolini/jxr/ant/unittest/ExampleClass.html"/>
+    </target>
+
+    <target name="testMissingDestDir">
+        <au:expectfailure>
+            <jxr:jxr sourcepath="${src.test.java.dir}"/>
+        </au:expectfailure>
+    </target>
+
+    <target name="testMissingSourcePath">
+        <au:expectfailure>
+            <jxr:jxr destdir="${build.unittest.dest.dir}"/>
+        </au:expectfailure>
+    </target>
+
+    <target name="testExcludes">
+        <jxr:jxr destdir="${build.unittest.dest.dir}" sourcepath="${src.test.java.dir}">
+            <patternset>
+                <exclude name="com/mattbertolini/jxr/ant/unittest/ClassToExclude.java"/>
+            </patternset>
+        </jxr:jxr>
+        <au:assertFileExists file="${build.unittest.dest.dir}/com/mattbertolini/jxr/ant/unittest/ExampleClass.html"/>
+        <au:assertFileDoesntExist file="${build.unittest.dest.dir}/com/mattbertolini/jxr/ant/unittest/ClassToExclude.html"/>
+    </target>
+</project>

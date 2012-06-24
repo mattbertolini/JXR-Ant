@@ -1,0 +1,29 @@
+<!--
+    Copyright 2012 Matt Bertolini
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<ivysettings>
+    <resolvers>
+        <url name="maven-central-snapshot" m2compatible="true" signer="maven-central-pgp">
+            <artifact pattern="${maven.snapshot.url}/[organisation]/[module]/[revision].SNAPSHOT/[artifact]-[revision].${snapshot.timestamp}(-[classifier]).[ext]"/>
+        </url>
+        <url name="maven-central-release" m2compatible="true" signer="maven-central-pgp">
+            <artifact pattern="${maven.release.url}/[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"/>
+        </url>
+    </resolvers>
+    <credentials host="oss.sonatype.org" username="${maven.username}" passwd="${maven.password}" realm="Sonatype Nexus Repository Manager"/>
+    <signers>
+        <pgp name="maven-central-pgp" secring="${pgp.secring.file}" keyId="${pgp.key.id}" password="${pgp.key.password}"/>
+    </signers>
+</ivysettings>
