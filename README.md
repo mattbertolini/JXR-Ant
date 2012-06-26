@@ -12,17 +12,17 @@ The JXR Ant Task is licensed under the [Apache License, Version 2.0](http://www.
 Download the library from Maven Central and make sure it is available to ant in some way (e.g. On Ant's classpath or in a `<path>`).
 
 ```xml
-    <dependency>
-        <groupId>com.mattbertolini</groupId>
-        <artifactId>jxr-ant</artifactId>
-        <version>1.0.0</version>
-    </dependency>
+<dependency>
+    <groupId>com.mattbertolini</groupId>
+    <artifactId>jxr-ant</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
 
 In your ant file, load the task.
 
 ```xml
-    <taskdef resource="com/mattbertolini/jxr/ant/antlib.xml"/>
+<taskdef resource="com/mattbertolini/jxr/ant/antlib.xml"/>
 ```
 
 ## Parameters
@@ -121,35 +121,35 @@ The same as the window title attribute.
 Here is a basic uasage example:
 
 ```xml
-    <jxr destdir="dest/docs/jxr" sourcepath="src"/>
+<jxr destdir="dest/docs/jxr" sourcepath="src"/>
 ```
 
 Here is an example using the `<sourcepath>` nested element instead of the attribute:
 
 ```xml
-    <jxr destdir="dest/docs/jxr/">
-        <sourcepath>
-            <pathelement location="src"/>
-        </sourcepath>
-    </jxr>
+<jxr destdir="dest/docs/jxr/">
+    <sourcepath>
+        <pathelement location="src"/>
+    </sourcepath>
+</jxr>
 ```
 
 Here is an example with an HTML footer defined in the `<bottom>` nested element:
 
 ```xml
-    <jxr destdir="dest/docs/jxr" sourcepath="src">
-        <bottom><![CDATA[<p>Fotter text here</p>]]></bottom>
-    </jxr>
+<jxr destdir="dest/docs/jxr" sourcepath="src">
+    <bottom><![CDATA[<p>Fotter text here</p>]]></bottom>
+</jxr>
 ```
 
 Here is an example with some classes excluded using a `<patternset>` element:
 
 ```xml
-    <jxr destdir="dest/docs/jxr" sourcepath="src">
-        <patternset>
-            <excludes name="**/example/subpackage/**"/>
-        </patternset>
-    </jxr>
+<jxr destdir="dest/docs/jxr" sourcepath="src">
+    <patternset>
+        <excludes name="**/example/subpackage/**"/>
+    </patternset>
+</jxr>
 ```
 
 ## Bugs
