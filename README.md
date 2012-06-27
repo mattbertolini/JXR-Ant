@@ -138,7 +138,7 @@ Here is an example with an HTML footer defined in the `<bottom>` nested element:
 
 ```xml
 <jxr destdir="dest/docs/jxr" sourcepath="src">
-    <bottom><![CDATA[<p>Fotter text here</p>]]></bottom>
+    <bottom><![CDATA[<p>Footer text here</p>]]></bottom>
 </jxr>
 ```
 
