@@ -36,7 +36,7 @@ In your ant file, load the task.
   </tr>
   <tr>
     <td>bottom</td>
-    <td>The text or HTML to place at the footter of the generated files.</td>
+    <td>The text or HTML to place at the footer of the generated files.</td>
     <td>all</td>
     <td>No.</td>
   <tr>
