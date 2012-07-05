@@ -15,7 +15,7 @@
     limitations under the License.
 -->
 <project name="jxr-ant" basedir="." default="build" xmlns:ivy="antlib:org.apache.ivy.ant"
-         xmlns:ac="antlib:net.sf.antcontrib" xmlns:emma="antlib:net.sourceforge.emma"
+         xmlns:ac="antlib:net.sf.antcontrib"
          xmlns:findbugs="antlib:com.google.code.findbugs" xmlns:au="antlib:org.apache.ant.antunit">
     <property file="build.properties"/>
 
