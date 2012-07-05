@@ -1,4 +1,4 @@
-package com.mattbertolini.jxr.ant.unittest;
+package testdata;
 
 public class ExampleClass {
     public void foo() {

@@ -1,4 +1,4 @@
-package com.mattbertolini.jxr.ant.unittest;
+package testdata;
 
 public class ClassToExclude {
     public void aMethod() {

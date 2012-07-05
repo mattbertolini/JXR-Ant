@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2012 Matt Bertolini
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<project name="JxrTaskTest" xmlns:au="antlib:org.apache.ant.antunit" xmlns:jxr="antlib:com.mattbertolini.jxr.ant">
+    <target name="setUp">
+        <tempfile property="temp.dir" prefix="JxrTaskTest" destdir="${java.io.tmpdir}"/>
+        <mkdir dir="${temp.dir}"/>
+    </target>
+
+    <target name="tearDown">
+        <delete dir="${temp.dir}" quiet="false" failonerror="true"/>
+    </target>
+
+    <target name="testSuccessfulBuild">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="."/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testMissingDestDir">
+        <au:expectfailure>
+            <jxr:jxr sourcepath="."/>
+        </au:expectfailure>
+    </target>
+
+    <target name="testMissingSourcePath">
+        <au:expectfailure>
+            <jxr:jxr destdir="${temp.dir}"/>
+        </au:expectfailure>
+    </target>
+
+    <target name="testExcludes">
+        <jxr:jxr destdir="${temp.dir}" sourcepath=".">
+            <patternset>
+                <exclude name="testdata/ClassToExclude.java"/>
+            </patternset>
+        </jxr:jxr>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+        <au:assertFileDoesntExist file="${temp.dir}/testdata/ClassToExclude.html"/>
+    </target>
+</project>

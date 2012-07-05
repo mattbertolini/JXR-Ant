@@ -15,8 +15,8 @@
     limitations under the License.
 -->
 <project name="jxr-ant" basedir="." default="build" xmlns:ivy="antlib:org.apache.ivy.ant"
-         xmlns:ac="antlib:net.sf.antcontrib"
-         xmlns:findbugs="antlib:com.google.code.findbugs" xmlns:au="antlib:org.apache.ant.antunit">
+         xmlns:ac="antlib:net.sf.antcontrib" xmlns:jacoco="antlib:org.jacoco.ant"
+         xmlns:findbugs="antlib:com.google.code.findbugs">
     <property file="build.properties"/>
 
     <condition property="offline" value="true" else="false">
@@ -44,6 +44,7 @@
 
     <target name="init" depends="clean">
         <mkdir dir="${lib.default.dir}"/>
+        <mkdir dir="${lib.provided.dir}"/>
         <mkdir dir="${lib.test.dir}"/>
         <mkdir dir="${lib.build.dir}"/>
         <mkdir dir="${build.temp.dir}"/>
@@ -88,18 +89,29 @@
             <fileset dir="${lib.default.dir}"/>
         </path>
 
+        <path id="provided-classpath">
+            <fileset dir="${lib.provided.dir}"/>
+        </path>
+
         <path id="test-classpath">
             <fileset dir="${lib.test.dir}"/>
+        </path>
+
+        <path id="compile-source-classpath">
+            <path refid="default-classpath"/>
+            <path refid="provided-classpath"/>
         </path>
 
         <path id="compile-tests-classpath">
             <path location="${build.classes.dir}"/>
             <path refid="test-classpath"/>
             <path refid="default-classpath"/>
+            <path refid="provided-classpath"/>
         </path>
 
         <path id="run-unit-tests-classpath">
             <path location="${build.instrumentedclasses.dir}"/>
+            <path location="${build.resources.dir}"/>
             <path location="${build.test.classes.dir}"/>
             <path location="${build.test.resources.dir}"/>
             <path refid="test-classpath"/>
@@ -110,7 +122,7 @@
 
     <target name="load-third-party-tasks" depends="create-paths">
         <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="build-classpath" uri="antlib:net.sf.antcontrib"/>
-        <taskdef resource="org/apache/ant/antunit/antlib.xml" classpathref="test-classpath" uri="antlib:org.apache.ant.antunit"/>
+        <taskdef resource="org/jacoco/ant/antlib.xml" classpathref="build-classpath" uri="antlib:org.jacoco.ant"/>
         <taskdef resource="edu/umd/cs/findbugs/anttask/tasks.properties" classpathref="build-classpath" uri="antlib:com.google.code.findbugs"/>
     </target>
 
@@ -118,9 +130,9 @@
         <sync todir="${build.resources.dir}">
             <fileset dir="${src.main.resources.dir}"/>
         </sync>
-        <!--<sync todir="${build.test.resources.dir}">
+        <sync todir="${build.test.resources.dir}">
             <fileset dir="${src.test.resources.dir}"/>
-        </sync>-->
+        </sync>
     </target>
 
     <target name="compile-source" depends="create-paths">
@@ -128,7 +140,7 @@
             <include name= "**/*.java"/>
         </depend>
         <javac srcdir="${src.main.java.dir}" destdir="${build.classes.dir}" source="1.6" fork="true" failonerror="true" includeantruntime="false" debug="true" encoding="UTF-8">
-            <classpath refid="default-classpath"/>
+            <classpath refid="compile-source-classpath"/>
         </javac>
     </target>
 
@@ -141,12 +153,43 @@
         </javac>
     </target>
 
-    <target name="run-antunit-tests" depends="compile-source, compile-tests, load-third-party-tasks, sync-resources">
-        <au:antunit>
-            <fileset file="antunit.xml"/>
-            <au:plainlistener/>
-            <au:xmllistener todir="${build.reports.unittest.dir}"/>
-        </au:antunit>
+    <target name="run-unit-tests" depends="compile-source, compile-tests, load-third-party-tasks, sync-resources">
+        <sync todir="${build.instrumentedclasses.dir}">
+            <fileset dir="${build.classes.dir}"/>
+        </sync>
+        <jacoco:coverage destfile="${build.reports.coverage.dir}/${project.name}-coverage.exec">
+            <junit haltonerror="false" haltonfailure="false" printsummary="true" errorproperty="test.failed" failureproperty="test.failed" fork="true" forkmode="once">
+                <classpath refid="run-unit-tests-classpath"/>
+                <formatter type="xml"/>
+                <batchtest fork="true" todir="${build.reports.unittest.dir}">
+                    <fileset dir="${build.test.classes.dir}">
+                        <include name="**/*Test.class"/>
+                    </fileset>
+                </batchtest>
+            </junit>
+        </jacoco:coverage>
+        <junitreport todir="${build.reports.unittest.dir}">
+            <fileset dir="${build.reports.unittest.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${build.reports.unittest.dir}"/>
+        </junitreport>
+        <jacoco:report>
+            <jacoco:executiondata>
+                <file file="${build.reports.coverage.dir}/${project.name}-coverage.exec"/>
+            </jacoco:executiondata>
+            <jacoco:structure name="${project.name}">
+                <jacoco:classfiles>
+                    <fileset dir="${build.instrumentedclasses.dir}"/>
+                </jacoco:classfiles>
+                <jacoco:sourcefiles encoding="UTF-8" tabwidth="4">
+                    <fileset dir="${src.main.java.dir}"/>
+                </jacoco:sourcefiles>
+            </jacoco:structure>
+            <jacoco:html destdir="${build.reports.coverage.dir}" encoding="UTF-8" locale="en_US"/>
+            <jacoco:xml destfile="${build.reports.coverage.dir}/${project.name}-coverage.xml" encoding="UTF-8"/>
+        </jacoco:report>
+        <fail if="test.failed">One or more unit tests failed/errored. Check ${build.reports.unittest.dir} for details.</fail>
     </target>
 
     <target name="run-findbugs" depends="create-paths, load-third-party-tasks, compile-source"> <!-- ,compile-tests -->
@@ -211,6 +254,7 @@
     <target name="make-pom" depends="retrieve-dependencies">
         <ivy:makepom ivyfile="${basedir}/ivy.xml" pomfile="${dist.dir}/${project.name}-${project.version}.pom" artifactpackaging="jar" templatefile="pom.xml">
             <ivy:mapping conf="default" scope="compile"/>
+            <ivy:mapping conf="provided" scope="provided"/>
             <ivy:mapping conf="test" scope="test"/>
             <ivy:mapping conf="build" scope="provided"/>
         </ivy:makepom>
@@ -222,7 +266,7 @@
     <target name="build" description="Runs a build and makes artifacts.">
         <antcall>
             <param name="param.full.build" value="true"/>
-            <target name="run-antunit-tests"/>
+            <target name="run-unit-tests"/>
             <target name="run-findbugs"/>
             <target name="make-artifacts"/>
         </antcall>
