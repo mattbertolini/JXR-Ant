@@ -195,7 +195,9 @@
     <target name="run-findbugs" depends="create-paths, load-third-party-tasks, compile-source"> <!-- ,compile-tests -->
         <path id="aux-classpath">
             <path refid="default-classpath"/>
+            <path refid="provided-classpath"/>
             <path refid="test-classpath"/>
+            <path refid="build-classpath"/>
         </path>
         <findbugs:findbugs classpathref="build-classpath" pluginlist="" output="xml:withMessages" outputFile="${build.reports.findbugs.dir}/${project.name}-findbugs.xml" jvmargs="-Xms${findbugs.mem.initial} -Xmx${findbugs.mem.max}">
             <findbugs:class location="${build.classes.dir}"/>
@@ -218,7 +220,7 @@
             </ac:sourcefiles>
             <ac:mapper type="glob" dir="${src.main.java.dir}" from="*.java" to="${build.javadoc.dir}/*.html"/>
             <ac:sequential>
-                <javadoc destdir="${build.javadoc.dir}" failonerror="true" classpathref="default-classpath" windowtitle="JXR Ant Documentation" charset="UTF-8">
+                <javadoc destdir="${build.javadoc.dir}" failonerror="true" classpathref="compile-source-classpath" windowtitle="JXR Ant Documentation" charset="UTF-8">
                     <packageset dir="${src.main.java.dir}" defaultexcludes="true"/>
                     <link href="http://docs.oracle.com/javase/6/docs/api/"/>
                     <link href="http://maven.apache.org/jxr/apidocs/"/>
