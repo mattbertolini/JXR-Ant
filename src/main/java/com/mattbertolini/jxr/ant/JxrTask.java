@@ -231,6 +231,7 @@ public class JxrTask extends Task {
      * @param stylesheet The custom stylesheet
      */
     public void setStylesheet(Resource stylesheet) {
+        this.log("Setting custom stylesheet " + stylesheet.toString(), LogLevel.DEBUG.getLevel());
         this.stylesheet = stylesheet;
     }
 

@@ -128,4 +128,12 @@
         <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
         <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
     </target>
+
+    <target name="testSetStylesheet">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." stylesheet="example-stylesheet.css"/>
+        <au:assertLogContains text="Setting custom stylesheet ${basedir}/example-stylesheet.css" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
 </project>
