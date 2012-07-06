@@ -64,17 +64,6 @@ public class JxrTask extends Task {
         this.jxr = new JXR();
     }
 
-    /**
-     * Constructor that allows for custom JXR implementation. Marked protected because it really won't be used for
-     * anything other than unit tests.
-     *
-     * @param jxr The JXR implementation.
-     */
-    protected JxrTask(JXR jxr) {
-        super();
-        this.jxr = jxr;
-    }
-
     @Override
     public void init() throws BuildException {
         this.sourcePaths = new Path(this.getProject());
