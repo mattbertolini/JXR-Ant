@@ -64,13 +64,13 @@ public final class AntTaskLog implements Log {
 
         AntTaskLog that = (AntTaskLog) o;
 
-        if (!task.equals(that.task)) return false;
+        if (task != null ? !task.equals(that.task) : that.task != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return task.hashCode();
+        return task != null ? task.hashCode() : 0;
     }
 }

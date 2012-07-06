@@ -158,9 +158,6 @@ public class JxrTask extends Task {
      * @param destDir The destination directory.
      */
     public void setDestDir(FileResource destDir) {
-        if(destDir == null) {
-            throw new BuildException("Destination path not specified.");
-        }
         if(!destDir.isDirectory()) {
             throw new BuildException("Destination path " + destDir + " is not a directory.");
         }
@@ -211,9 +208,6 @@ public class JxrTask extends Task {
      * @param outputEncoding The encoding to set.
      */
     public void setOutputEncoding(String outputEncoding) {
-        if(outputEncoding == null) {
-            throw new BuildException("Output encoding cannot be null.");
-        }
         this.log("Setting output encoding to " + outputEncoding, LogLevel.DEBUG.getLevel());
         this.outputEncoding = outputEncoding;
     }

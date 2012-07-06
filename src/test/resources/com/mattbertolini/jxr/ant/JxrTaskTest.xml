@@ -37,6 +37,12 @@
         </au:expectfailure>
     </target>
 
+    <target name="testDestDirNotDirectory">
+        <au:expectfailure>
+            <jxr:jxr sourcepath="." destdir="null"/>
+        </au:expectfailure>
+    </target>
+
     <target name="testMissingSourcePath">
         <au:expectfailure>
             <jxr:jxr destdir="${temp.dir}"/>
