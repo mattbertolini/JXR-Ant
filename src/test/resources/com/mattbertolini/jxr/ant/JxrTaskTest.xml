@@ -52,4 +52,74 @@
         <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
         <au:assertFileDoesntExist file="${temp.dir}/testdata/ClassToExclude.html"/>
     </target>
+
+    <target name="testSetInputEncoding">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." inputencoding="UTF-16"/>
+        <au:assertLogContains text="Setting input encoding to UTF-16" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetOutputEncoding">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." outputencoding="UTF-16"/>
+        <au:assertLogContains text="Setting output encoding to UTF-16" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetWindowTitleByAttribute">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." windowtitle="Test window title"/>
+        <au:assertLogContains text="Setting window title to: Test window title" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetWindowTitleByElement">
+        <jxr:jxr destdir="${temp.dir}" sourcepath=".">
+            <jxr:windowtitle>Test window title</jxr:windowtitle>
+        </jxr:jxr>
+        <au:assertLogContains text="Setting window title" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetDocTitleByAttribute">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." doctitle="Test doc title"/>
+        <au:assertLogContains text="Setting doc title to: Test doc title" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetDocTitleByElement">
+        <jxr:jxr destdir="${temp.dir}" sourcepath=".">
+            <jxr:doctitle>Test doc title</jxr:doctitle>
+        </jxr:jxr>
+        <au:assertLogContains text="Setting doc title" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetBottomByAttribute">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." bottom="Copyright Notice"/>
+        <au:assertLogContains text="Setting bottom text" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetBottomByElement">
+        <jxr:jxr destdir="${temp.dir}" sourcepath=".">
+            <jxr:bottom>Copyright Notice</jxr:bottom>
+        </jxr:jxr>
+        <au:assertLogContains text="Setting bottom text" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
 </project>

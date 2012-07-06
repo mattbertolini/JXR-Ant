@@ -139,6 +139,7 @@ public class JxrTask extends Task {
      * @param bottom The footer text.
      */
     public void addBottom(StringElement bottom) {
+        this.log("Setting bottom text", LogLevel.DEBUG.getLevel());
         this.bottom = bottom;
     }
 
@@ -147,6 +148,7 @@ public class JxrTask extends Task {
      * @param bottom The footer text.
      */
     public void setBottom(String bottom) {
+        this.log("Setting bottom text", LogLevel.DEBUG.getLevel());
         this.bottom = new StringElement(bottom);
     }
 
@@ -171,6 +173,7 @@ public class JxrTask extends Task {
      * @param docTitle The doc title
      */
     public void addDocTitle(StringElement docTitle) {
+        this.log("Setting doc title", LogLevel.DEBUG.getLevel());
         this.docTitle = docTitle;
     }
 
@@ -180,6 +183,7 @@ public class JxrTask extends Task {
      * @param docTitle The doc title.
      */
     public void setDocTitle(String docTitle) {
+        this.log("Setting doc title to: " + docTitle, LogLevel.DEBUG.getLevel());
         this.docTitle = new StringElement(docTitle);
     }
 
@@ -189,6 +193,7 @@ public class JxrTask extends Task {
      * @param inputEncoding The file encoding.
      */
     public void setInputEncoding(String inputEncoding) {
+        this.log("Setting input encoding to " + inputEncoding, LogLevel.DEBUG.getLevel());
         this.inputEncoding = inputEncoding;
     }
 
@@ -209,6 +214,7 @@ public class JxrTask extends Task {
         if(outputEncoding == null) {
             throw new BuildException("Output encoding cannot be null.");
         }
+        this.log("Setting output encoding to " + outputEncoding, LogLevel.DEBUG.getLevel());
         this.outputEncoding = outputEncoding;
     }
 
@@ -249,6 +255,7 @@ public class JxrTask extends Task {
      * @param windowTitle The window title to set.
      */
     public void addWindowTitle(StringElement windowTitle) {
+        this.log("Setting window title", LogLevel.DEBUG.getLevel());
         this.windowTitle = windowTitle;
     }
 
@@ -258,6 +265,7 @@ public class JxrTask extends Task {
      * @param windowTitle The window title to set.
      */
     public void setWindowTitle(String windowTitle) {
+        this.log("Setting window title to: " + windowTitle, LogLevel.DEBUG.getLevel());
         this.windowTitle = new StringElement(windowTitle);
     }
 
