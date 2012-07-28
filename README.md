@@ -9,14 +9,20 @@ The JXR Ant Task is licensed under the [Apache License, Version 2.0](http://www.
 
 ## Usage
 
-Download the library from Maven Central and make sure it is available to ant in some way (e.g. On Ant's classpath or in a `<path>`).
+Download the library from [Maven Central](http://search.maven.org/#search|ga|1|g%3A%22com.mattbertolini%22%20a%3A%22jxr-ant%22) and make sure it is available to ant in some way (e.g. On Ant's classpath or in a `<path>`).
 
+Maven:
 ```xml
 <dependency>
     <groupId>com.mattbertolini</groupId>
     <artifactId>jxr-ant</artifactId>
     <version>1.0.0</version>
 </dependency>
+```
+
+Ivy:
+```xml
+<dependency org="com.mattbertolini" name="jxr-ant" rev="1.0.0"/>
 ```
 
 In your ant file, load the task.
@@ -154,4 +160,4 @@ Here is an example with some classes excluded using a `<patternset>` element:
 
 ## Bugs
 
-If you find any bugs, pleasae file them in the issue tracker above.
+If you find any bugs, pleasae file them in the issue tracker above. Patches and pull requests are encouraged.

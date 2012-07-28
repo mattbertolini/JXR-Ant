@@ -130,7 +130,7 @@
     </target>
 
     <target name="testSetStylesheet">
-        <jxr:jxr destdir="${temp.dir}" sourcepath="." stylesheet="example-stylesheet.css"/>
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." stylesheet="${basedir}/example-stylesheet.css"/>
         <au:assertLogContains text="Setting custom stylesheet ${basedir}/example-stylesheet.css" level="debug"/>
         <au:assertFileExists file="${temp.dir}/index.html"/>
         <au:assertFileExists file="${temp.dir}/stylesheet.css"/>

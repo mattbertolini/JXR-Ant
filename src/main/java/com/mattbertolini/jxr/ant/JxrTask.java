@@ -58,9 +58,11 @@ public class JxrTask extends Task {
     private Resource templateDir;
     private StringElement windowTitle;
 
+    /**
+     * Default constructor required by Ant.
+     */
     public JxrTask() {
         super();
-        // Default constructor required by Ant.
         this.jxr = new JXR();
     }
 
