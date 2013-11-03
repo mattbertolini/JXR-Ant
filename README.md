@@ -158,6 +158,35 @@ Here is an example with some classes excluded using a `<patternset>` element:
 </jxr>
 ```
 
+## Build and Test
+### Requirements
+* [Apache Ant](http://ant.apache.org/) - Version 1.8 or higher.
+* JDK 6 or higher (Compiled with 1.6 source and target).
+
+### Build
+To build this project, clone the repo and run the ```ant``` command:
+```
+$ git clone https://github.com/mattbertolini/JXR-Ant.git
+$ cd JXR-Ant
+$ ant
+```
+
+The distributable jar files will be located in the ```dist``` folder. The build reports (unit test, dependency,
+coverage, etc.) will be located in the ```build/reports``` dir.
+
+To run the unit tests run the ```run-unit-tests``` task.
+```
+$ ant run-unit-tests
+```
+
 ## Bugs
 
 If you find any bugs, pleasae file them in the issue tracker above. Patches and pull requests are encouraged.
+
+## Release Notes
+
+**1.0.0 - 2012-06-24**
+
+* Initial release.
+* Uses JXR version 2.3
+
