@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Matt Bertolini
+ * Copyright 2012-2013 Matt Bertolini
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,13 +86,13 @@ public class JxrTask extends Task {
             this.outputEncoding = DEFAULT_ENCODING;
         }
         if(this.windowTitle == null) {
-            this.windowTitle = new StringElement(String.format(DEFAULT_WINDOW_TITLE, this.getProject().getName()));
+            this.windowTitle = new StringElement(this.getProject(), String.format(DEFAULT_WINDOW_TITLE, this.getProject().getName()));
         }
         if(this.docTitle == null) {
-            this.docTitle = new StringElement(String.format(DEFAULT_DOC_TITLE, this.getProject().getName()));
+            this.docTitle = new StringElement(this.getProject(), String.format(DEFAULT_DOC_TITLE, this.getProject().getName()));
         }
         if(this.bottom == null) {
-            this.bottom = new StringElement(DEFAULT_BOTTOM);
+            this.bottom = new StringElement(this.getProject(), DEFAULT_BOTTOM);
         }
 
         List<String> sourcePathStrings = Arrays.asList(this.sourcePaths.list());
@@ -151,7 +151,7 @@ public class JxrTask extends Task {
      */
     public void setBottom(String bottom) {
         this.log("Setting bottom text", LogLevel.DEBUG.getLevel());
-        this.bottom = new StringElement(bottom);
+        this.bottom = new StringElement(this.getProject(), bottom);
     }
 
     /**
@@ -183,7 +183,7 @@ public class JxrTask extends Task {
      */
     public void setDocTitle(String docTitle) {
         this.log("Setting doc title to: " + docTitle, LogLevel.DEBUG.getLevel());
-        this.docTitle = new StringElement(docTitle);
+        this.docTitle = new StringElement(this.getProject(), docTitle);
     }
 
     /**
@@ -232,7 +232,7 @@ public class JxrTask extends Task {
      *
      * @param stylesheet The custom stylesheet
      */
-    public void setStylesheet(Resource stylesheet) {
+    public void setStylesheet(FileResource stylesheet) {
         this.log("Setting custom stylesheet " + stylesheet.toString(), LogLevel.DEBUG.getLevel());
         this.stylesheet = stylesheet;
     }
@@ -263,7 +263,7 @@ public class JxrTask extends Task {
      */
     public void setWindowTitle(String windowTitle) {
         this.log("Setting window title to: " + windowTitle, LogLevel.DEBUG.getLevel());
-        this.windowTitle = new StringElement(windowTitle);
+        this.windowTitle = new StringElement(this.getProject(), windowTitle);
     }
 
     /**

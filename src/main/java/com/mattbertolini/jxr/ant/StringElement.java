@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Matt Bertolini
+ * Copyright 2012-2013 Matt Bertolini
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,24 +16,26 @@
 
 package com.mattbertolini.jxr.ant;
 
-import org.apache.tools.ant.Task;
+import org.apache.tools.ant.Project;
 
 /**
  * @author Matt Bertolini
  */
-public class StringElement extends Task {
+public class StringElement {
+    private Project project;
     private String str;
 
-    public StringElement() {
-        // Default constructor
+    public StringElement(Project project) {
+        this.project = project;
     }
 
-    public StringElement(String str) {
+    public StringElement(Project project, String str) {
+        this.project = project;
         this.str = str;
     }
 
     public void addText(String str) {
-        this.str = this.getProject().replaceProperties(str);
+        this.str = this.project.replaceProperties(str);
     }
 
     public String getText() {
@@ -47,6 +49,7 @@ public class StringElement extends Task {
 
         StringElement that = (StringElement) o;
 
+        if (project != null ? !project.equals(that.project) : that.project != null) return false;
         if (str != null ? !str.equals(that.str) : that.str != null) return false;
 
         return true;
@@ -54,6 +57,8 @@ public class StringElement extends Task {
 
     @Override
     public int hashCode() {
-        return str != null ? str.hashCode() : 0;
+        int result = project != null ? project.hashCode() : 0;
+        result = 31 * result + (str != null ? str.hashCode() : 0);
+        return result;
     }
 }
