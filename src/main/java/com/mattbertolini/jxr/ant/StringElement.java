@@ -21,8 +21,8 @@ import org.apache.tools.ant.Project;
 /**
  * @author Matt Bertolini
  */
-public class StringElement {
-    private Project project;
+public final class StringElement {
+    private final Project project;
     private String str;
 
     public StringElement(Project project) {
