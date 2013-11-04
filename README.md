@@ -181,7 +181,7 @@ $ ant run-unit-tests
 
 ## Bugs
 
-If you find any bugs, pleasae file them in the issue tracker above. Patches and pull requests are encouraged.
+If you find any bugs, please file them in the issue tracker above. Patches and pull requests are encouraged.
 
 ## Release Notes
 
