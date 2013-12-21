@@ -185,6 +185,10 @@ If you find any bugs, please file them in the issue tracker above. Patches and p
 
 ## Release Notes
 
+**2.0.0 - 2013-12-20**
+
+* Updating JXR dependency to version 2.4.
+
 **1.0.0 - 2012-06-24**
 
 * Initial release.
