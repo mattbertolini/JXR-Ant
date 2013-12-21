@@ -1,6 +1,6 @@
 # JXR Ant Task
 
-Version 1.0.0<br/>
+Version 2.0.0<br/>
 Written by Matt Bertolini
 
 ## License
@@ -16,13 +16,13 @@ Maven:
 <dependency>
     <groupId>com.mattbertolini</groupId>
     <artifactId>jxr-ant</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
 Ivy:
 ```xml
-<dependency org="com.mattbertolini" name="jxr-ant" rev="1.0.0"/>
+<dependency org="com.mattbertolini" name="jxr-ant" rev="2.0.0"/>
 ```
 
 In your ant file, load the task.
