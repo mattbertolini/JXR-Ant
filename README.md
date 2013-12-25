@@ -158,6 +158,42 @@ Here is an example with some classes excluded using a `<patternset>` element:
 </jxr>
 ```
 
+### Gradle
+
+Since Ant tasks are [first-class citizens](http://www.gradle.org/docs/current/userguide/ant.html) in Gradle, adding
+JXR-Ant to a gradle build is very easy. To start add the JXR-Ant dependency to the dependencies section. It is
+recommended you create a special configuration for the library:
+
+```groovy
+configurations {
+    jxr
+}
+dependencies {
+    jxr group: 'com.mattbertolini', name: 'jxr-ant', version: '2.0.0'
+}
+```
+
+Next, define the ant task an invoke it:
+
+```groovy
+task runJxr() << {
+    ant.taskdef(resource: 'com/mattbertolini/jxr/ant/antlib.xml', classpath: configurations.jxr.asPath)
+    ant.jxr(destDir: "$docsDir/jxr", sourcePath: files(sourceSets.main.java.srcDirs).asPath)
+}
+```
+
+Here is a more complex example:
+
+```groovy
+task runJxr() << {
+    ant.taskdef(resource: 'com/mattbertolini/jxr/ant/antlib.xml', classpath: configurations.jxr.asPath)
+    ant.jxr(destDir: "$docsDir/jxr", sourcePath: files(sourceSets.main.java.srcDirs).asPath) {
+        bottom('<p>Footer text here</p>')
+        patternset(excludes: '**/example/subpackage/**')
+    }
+}
+```
+
 ## Build and Test
 ### Requirements
 * [Apache Ant](http://ant.apache.org/) - Version 1.8 or higher.
