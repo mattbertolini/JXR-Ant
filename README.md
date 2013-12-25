@@ -185,9 +185,9 @@ task runJxr() << {
 Here is a more complex example:
 
 ```groovy
-task runJxr() << {
+task runJxr(dependsOn: 'javadoc') << {
     ant.taskdef(resource: 'com/mattbertolini/jxr/ant/antlib.xml', classpath: configurations.jxr.asPath)
-    ant.jxr(destDir: "$docsDir/jxr", sourcePath: files(sourceSets.main.java.srcDirs).asPath) {
+    ant.jxr(destDir: "$docsDir/jxr", sourcePath: files(sourceSets.main.java.srcDirs).asPath, javadocDir: "$docsDir/javadoc") {
         bottom('<p>Footer text here</p>')
         patternset(excludes: '**/example/subpackage/**')
     }
