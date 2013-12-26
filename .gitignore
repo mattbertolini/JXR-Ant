@@ -4,4 +4,11 @@
 /build
 /bin
 *.iml
+*.ipr
+*.iws
+.idea/
+*.class
+*.jar
+*.war
+*.ear
 build-publish.properties
