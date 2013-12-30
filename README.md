@@ -176,7 +176,7 @@ dependencies {
 Next, define the ant task an invoke it:
 
 ```groovy
-task runJxr() << {
+task runJxr() {
     ant.taskdef(resource: 'com/mattbertolini/jxr/ant/antlib.xml', classpath: configurations.jxr.asPath)
     ant.jxr(destDir: "$docsDir/jxr", sourcePath: files(sourceSets.main.java.srcDirs).asPath)
 }
@@ -185,7 +185,7 @@ task runJxr() << {
 Here is a more complex example:
 
 ```groovy
-task runJxr(dependsOn: 'javadoc') << {
+task runJxr(dependsOn: 'javadoc') {
     ant.taskdef(resource: 'com/mattbertolini/jxr/ant/antlib.xml', classpath: configurations.jxr.asPath)
     ant.jxr(destDir: "$docsDir/jxr", sourcePath: files(sourceSets.main.java.srcDirs).asPath, javadocDir: "$docsDir/javadoc") {
         bottom('<p>Footer text here</p>')
