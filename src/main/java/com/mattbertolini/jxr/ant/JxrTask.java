@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Matt Bertolini
+ * Copyright 2012-2014 Matt Bertolini
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -201,6 +201,7 @@ public class JxrTask extends Task {
      * @param javadocDir The javadoc directory.
      */
     public void setJavadocDir(FileResource javadocDir) {
+        this.log("Setting javadoc directory to " + javadocDir, LogLevel.DEBUG.getLevel());
         this.javadocDir = javadocDir;
     }
 

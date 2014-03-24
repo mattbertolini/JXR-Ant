@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Copyright 2012 Matt Bertolini
+    Copyright 2012-2014 Matt Bertolini
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -135,5 +135,21 @@
         <au:assertFileExists file="${temp.dir}/index.html"/>
         <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
         <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="runJavadocForTestFiles">
+        <tempfile property="temp.javadoc.dir" prefix="JxrTaskTest" destdir="${java.io.tmpdir}/javadoc"/>
+        <javadoc destdir="${temp.javadoc.dir}" failonerror="true" charset="UTF-8">
+            <packageset dir="." defaultexcludes="true"/>
+        </javadoc>
+    </target>
+
+    <target name="testSetJavadocDir" depends="runJavadocForTestFiles">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." javadocdir="${temp.javadoc.dir}"/>
+        <au:assertLogContains text="Setting javadoc directory to" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+        <delete dir="${temp.javadoc.dir}"/>
     </target>
 </project>
