@@ -156,7 +156,7 @@
     <target name="testSetJavadocDirInputNotDirectory" depends="runJavadocForTestFiles">
         <jxr:jxr destdir="${temp.dir}" sourcepath="." javadocdir="${temp.javadoc.dir}/index.html"/>
         <au:assertFalse>
-            <au:logContains text="Setting javadoc directory to" level="debug"/>
+            <au:logcontains text="Setting javadoc directory to" level="debug"/>
         </au:assertFalse>
         <au:assertFileExists file="${temp.dir}/index.html"/>
         <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
