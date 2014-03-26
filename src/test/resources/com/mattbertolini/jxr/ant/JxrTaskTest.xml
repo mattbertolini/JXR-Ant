@@ -32,6 +32,17 @@
         <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
     </target>
 
+    <target name="testSuccessfulBuildSourcePathElement">
+        <jxr:jxr destdir="${temp.dir}">
+            <sourcepath>
+                <pathelement location="."/>
+            </sourcepath>
+        </jxr:jxr>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
     <target name="testMissingDestDir">
         <au:expectfailure>
             <jxr:jxr sourcepath="."/>
