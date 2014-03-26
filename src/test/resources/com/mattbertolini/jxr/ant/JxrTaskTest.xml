@@ -22,6 +22,7 @@
 
     <target name="tearDown">
         <delete dir="${temp.dir}" quiet="false" failonerror="true"/>
+        <delete dir="${temp.javadoc.dir}" failonerror="false"/>
     </target>
 
     <target name="testSuccessfulBuild">
@@ -150,6 +151,15 @@
         <au:assertFileExists file="${temp.dir}/index.html"/>
         <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
         <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
-        <delete dir="${temp.javadoc.dir}"/>
+    </target>
+
+    <target name="testSetJavadocDirInputNotDirectory" depends="runJavadocForTestFiles">
+        <jxr:jxr destdir="${temp.dir}" sourcepath="." javadocdir="${temp.javadoc.dir}/index.html"/>
+        <au:assertFalse>
+            <au:logContains text="Setting javadoc directory to" level="debug"/>
+        </au:assertFalse>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
     </target>
 </project>

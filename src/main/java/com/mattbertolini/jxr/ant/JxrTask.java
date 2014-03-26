@@ -112,6 +112,7 @@ public class JxrTask extends Task {
             templatePathStr = this.templateDir.toString();
         }
         if(this.javadocDir != null && this.javadocDir.isDirectory()) {
+            this.log("Setting javadoc directory to " + javadocDir, LogLevel.DEBUG.getLevel());
             this.jxr.setJavadocLinkDir(this.javadocDir.toString());
         }
 
@@ -201,7 +202,6 @@ public class JxrTask extends Task {
      * @param javadocDir The javadoc directory.
      */
     public void setJavadocDir(FileResource javadocDir) {
-        this.log("Setting javadoc directory to " + javadocDir, LogLevel.DEBUG.getLevel());
         this.javadocDir = javadocDir;
     }
 
