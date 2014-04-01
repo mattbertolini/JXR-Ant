@@ -21,7 +21,9 @@
 
     <target name="authenticate">
         <input message="Enter Maven Central username: " addproperty="maven.username"/>
-        <input message="Enter Maven Central password: " addproperty="maven.password"/>
+        <input message="Enter Maven Central password: " addproperty="maven.password">
+            <handler type="secure"/>
+        </input>
     </target>
 
     <target name="snapshot" depends="build, authenticate">
