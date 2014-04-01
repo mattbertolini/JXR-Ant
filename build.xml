@@ -16,7 +16,7 @@
 -->
 <project name="jxr-ant" basedir="." default="build" xmlns="antlib:org.apache.tools.ant"
          xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:ac="antlib:net.sf.antcontrib" xmlns:jacoco="antlib:org.jacoco.ant"
-         xmlns:findbugs="antlib:com.google.code.findbugs" xmlns:jxr="antlib:com.mattbertolini.jxr.ant">
+         xmlns:findbugs="antlib:edu.umd.cs.findbugs.anttask" xmlns:jxr="antlib:com.mattbertolini.jxr.ant">
     <property file="build.properties"/>
 
     <condition property="offline" value="true" else="false">
@@ -126,9 +126,9 @@
     </target>
 
     <target name="load-third-party-tasks" depends="create-paths">
-        <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="build-classpath" uri="antlib:net.sf.antcontrib"/>
+        <taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="build-classpath" uri="antlib:net.sf.antcontrib"/>
         <taskdef resource="org/jacoco/ant/antlib.xml" classpathref="build-classpath" uri="antlib:org.jacoco.ant"/>
-        <taskdef resource="edu/umd/cs/findbugs/anttask/tasks.properties" classpathref="findbugs-classpath" uri="antlib:com.google.code.findbugs"/>
+        <taskdef resource="edu/umd/cs/findbugs/anttask/tasks.properties" classpathref="findbugs-classpath" uri="antlib:edu.umd.cs.findbugs.anttask"/>
         <taskdef name="jxr" classname="com.mattbertolini.jxr.ant.JxrTask" uri="antlib:com.mattbertolini.jxr.ant">
             <classpath>
                 <path location="${build.classes.dir}"/>
