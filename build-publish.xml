@@ -14,7 +14,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<project name="jxr-ant-publish" basedir="." default="publish-snapshot" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="jxr-ant-publish" basedir="." default="publish-snapshot" xmlns="antlib:org.apache.tools.ant"
+         xmlns:ivy="antlib:org.apache.ivy.ant">
     <import file="build.xml"/>
     <property file="build-publish.properties"/>
 
