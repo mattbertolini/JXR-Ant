@@ -124,6 +124,17 @@
         <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
     </target>
 
+    <target name="testSetDocTitleByElementWithProperty">
+        <property name="test.property" value="foo"/>
+        <jxr:jxr destdir="${temp.dir}" sourcepath=".">
+            <jxr:doctitle>Test doc title to ${test.property}</jxr:doctitle>
+        </jxr:jxr>
+        <au:assertLogContains text="Setting doc title" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
     <target name="testSetBottomByAttribute">
         <jxr:jxr destdir="${temp.dir}" sourcepath="." bottom="Copyright Notice"/>
         <au:assertLogContains text="Setting bottom text" level="debug"/>
@@ -135,6 +146,17 @@
     <target name="testSetBottomByElement">
         <jxr:jxr destdir="${temp.dir}" sourcepath=".">
             <jxr:bottom>Copyright Notice</jxr:bottom>
+        </jxr:jxr>
+        <au:assertLogContains text="Setting bottom text" level="debug"/>
+        <au:assertFileExists file="${temp.dir}/index.html"/>
+        <au:assertFileExists file="${temp.dir}/stylesheet.css"/>
+        <au:assertFileExists file="${temp.dir}/testdata/ExampleClass.html"/>
+    </target>
+
+    <target name="testSetBottomByElementWithProperty">
+        <property name="test.property" value="foo"/>
+        <jxr:jxr destdir="${temp.dir}" sourcepath=".">
+            <jxr:bottom>Copyright Notice with ${test.property}</jxr:bottom>
         </jxr:jxr>
         <au:assertLogContains text="Setting bottom text" level="debug"/>
         <au:assertFileExists file="${temp.dir}/index.html"/>

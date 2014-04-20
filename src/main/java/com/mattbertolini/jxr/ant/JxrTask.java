@@ -25,6 +25,7 @@ import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.PatternSet;
 import org.apache.tools.ant.types.Resource;
 import org.apache.tools.ant.types.resources.FileResource;
+import org.apache.tools.ant.types.resources.StringResource;
 import org.apache.tools.ant.types.resources.URLResource;
 import org.apache.tools.ant.util.ResourceUtils;
 
@@ -46,9 +47,9 @@ public class JxrTask extends Task {
     private static final String DEFAULT_WINDOW_TITLE = "%s Xref Documentation";
 
     private JXR jxr;
-    private StringElement bottom;
+    private StringResource bottom;
     private FileResource destDir;
-    private StringElement docTitle;
+    private StringResource docTitle;
     private PatternSet includesExcludes;
     private String inputEncoding;
     private FileResource javadocDir;
@@ -56,7 +57,7 @@ public class JxrTask extends Task {
     private Path sourcePaths;
     private Resource stylesheet;
     private Resource templateDir;
-    private StringElement windowTitle;
+    private StringResource windowTitle;
 
     /**
      * Default constructor required by Ant.
@@ -86,13 +87,13 @@ public class JxrTask extends Task {
             this.outputEncoding = DEFAULT_ENCODING;
         }
         if(this.windowTitle == null) {
-            this.windowTitle = new StringElement(this.getProject(), String.format(DEFAULT_WINDOW_TITLE, this.getProject().getName()));
+            this.windowTitle = new StringResource(this.getProject(), String.format(DEFAULT_WINDOW_TITLE, this.getProject().getName()));
         }
         if(this.docTitle == null) {
-            this.docTitle = new StringElement(this.getProject(), String.format(DEFAULT_DOC_TITLE, this.getProject().getName()));
+            this.docTitle = new StringResource(this.getProject(), String.format(DEFAULT_DOC_TITLE, this.getProject().getName()));
         }
         if(this.bottom == null) {
-            this.bottom = new StringElement(this.getProject(), DEFAULT_BOTTOM);
+            this.bottom = new StringResource(this.getProject(), DEFAULT_BOTTOM);
         }
 
         List<String> sourcePathStrings = Arrays.asList(this.sourcePaths.list());
@@ -121,7 +122,7 @@ public class JxrTask extends Task {
         this.jxr.setDest(this.destDir.toString());
 
         try {
-            this.jxr.xref(sourcePathStrings, templatePathStr, this.windowTitle.getText(), this.docTitle.getText(), this.bottom.getText());
+            this.jxr.xref(sourcePathStrings, templatePathStr, this.windowTitle.getValue(), this.docTitle.getValue(), this.bottom.getValue());
 
             if(this.stylesheet == null) {
                 URL defaultStylesheetUrl = this.getClass().getResource("/com/mattbertolini/jxr/ant/stylesheet.css");
@@ -141,7 +142,7 @@ public class JxrTask extends Task {
      * Optional.
      * @param bottom The footer text.
      */
-    public void addBottom(StringElement bottom) {
+    public void addBottom(StringResource bottom) {
         this.log("Setting bottom text", LogLevel.DEBUG.getLevel());
         this.bottom = bottom;
     }
@@ -152,7 +153,7 @@ public class JxrTask extends Task {
      */
     public void setBottom(String bottom) {
         this.log("Setting bottom text", LogLevel.DEBUG.getLevel());
-        this.bottom = new StringElement(this.getProject(), bottom);
+        this.bottom = new StringResource(this.getProject(), bottom);
     }
 
     /**
@@ -172,7 +173,7 @@ public class JxrTask extends Task {
      *
      * @param docTitle The doc title
      */
-    public void addDocTitle(StringElement docTitle) {
+    public void addDocTitle(StringResource docTitle) {
         this.log("Setting doc title", LogLevel.DEBUG.getLevel());
         this.docTitle = docTitle;
     }
@@ -184,7 +185,7 @@ public class JxrTask extends Task {
      */
     public void setDocTitle(String docTitle) {
         this.log("Setting doc title to: " + docTitle, LogLevel.DEBUG.getLevel());
-        this.docTitle = new StringElement(this.getProject(), docTitle);
+        this.docTitle = new StringResource(this.getProject(), docTitle);
     }
 
     /**
@@ -252,7 +253,7 @@ public class JxrTask extends Task {
      *
      * @param windowTitle The window title to set.
      */
-    public void addWindowTitle(StringElement windowTitle) {
+    public void addWindowTitle(StringResource windowTitle) {
         this.log("Setting window title", LogLevel.DEBUG.getLevel());
         this.windowTitle = windowTitle;
     }
@@ -264,7 +265,7 @@ public class JxrTask extends Task {
      */
     public void setWindowTitle(String windowTitle) {
         this.log("Setting window title to: " + windowTitle, LogLevel.DEBUG.getLevel());
-        this.windowTitle = new StringElement(this.getProject(), windowTitle);
+        this.windowTitle = new StringResource(this.getProject(), windowTitle);
     }
 
     /**
