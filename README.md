@@ -223,7 +223,7 @@ If you find any bugs, please file them in the issue tracker above. Patches and p
 
 ## Release Notes
 
-**2.1.0 - 2014-11-16
+**2.1.0 - 2014-11-16**
 
 * Updating JXR dependency to 2.5. Backward compatible.
 
