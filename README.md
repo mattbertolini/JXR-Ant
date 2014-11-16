@@ -1,7 +1,9 @@
 # JXR Ant Task
 
-Version 2.0.0<br/>
+Version 2.1.0<br/>
 Written by Matt Bertolini
+
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.mattbertolini/jxr-ant/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.mattbertolini/jxr-ant)
 
 ## License
 
@@ -16,13 +18,13 @@ Maven:
 <dependency>
     <groupId>com.mattbertolini</groupId>
     <artifactId>jxr-ant</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 
 Ivy:
 ```xml
-<dependency org="com.mattbertolini" name="jxr-ant" rev="2.0.0"/>
+<dependency org="com.mattbertolini" name="jxr-ant" rev="2.1.0"/>
 ```
 
 In your ant file, load the task.
@@ -169,7 +171,7 @@ configurations {
     jxr
 }
 dependencies {
-    jxr group: 'com.mattbertolini', name: 'jxr-ant', version: '2.0.0'
+    jxr group: 'com.mattbertolini', name: 'jxr-ant', version: '2.1.0'
 }
 ```
 
@@ -220,6 +222,10 @@ $ ant run-unit-tests
 If you find any bugs, please file them in the issue tracker above. Patches and pull requests are encouraged.
 
 ## Release Notes
+
+**2.1.0 - 2014-11-16
+
+* Updating JXR dependency to 2.5. Backward compatible.
 
 **2.0.0 - 2013-12-20**
 
