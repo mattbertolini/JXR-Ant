@@ -56,6 +56,6 @@
         <dependency org="org.jacoco" name="org.jacoco.ant" rev="0.7.2.201409121644" conf="build->default"/>
         <dependency org="com.google.code.findbugs" name="findbugs" rev="2.0.3" conf="findbugs->default"/>
         <dependency org="com.google.code.findbugs" name="findbugs-ant" rev="2.0.3" conf="findbugs->default"/>
-        <dependency org="org.bouncycastle" name="bcpg-jdk15on" rev="1.51" conf="build->default"/>
+        <dependency org="org.bouncycastle" name="bcpg-jdk15on" rev="1.50" conf="build->default"/>
     </dependencies>
 </ivy-module>
