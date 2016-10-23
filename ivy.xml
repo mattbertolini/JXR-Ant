@@ -49,7 +49,7 @@
         <dependency org="org.mockito" name="mockito-core" rev="1.9.5" conf="test->default"/>
         <dependency org="nl.jqno.equalsverifier" name="equalsverifier" rev="1.5" conf="test->default"/>
         <!-- Build Dependencies -->
-        <dependency org="org.apache.ivy" name="ivy" rev="2.3.0" conf="build->default"/>
+        <dependency org="org.apache.ivy" name="ivy" rev="2.4.0" conf="build->default"/>
         <dependency org="ant-contrib" name="ant-contrib" rev="1.0b3" conf="build->default">
             <exclude module="ant"/>
         </dependency>
