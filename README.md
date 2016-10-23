@@ -223,6 +223,11 @@ If you find any bugs, please file them in the issue tracker above. Patches and p
 
 ## Release Notes
 
+**3.0.0.dev - In development. Not yet released.**
+
+* Minimum Java version now at 1.7.
+* Updated build dependencies (JUnit, JaCoCo, Findbugs, etc).
+
 **2.1.0 - 2014-11-16**
 
 * Updating JXR dependency to 2.5. Backward compatible.
