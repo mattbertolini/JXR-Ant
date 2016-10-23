@@ -151,7 +151,7 @@
         <depend srcdir="${src.main.java.dir}" destdir="${build.classes.dir}" cache="${build.temp.dir}" closure="true">
             <include name= "**/*.java"/>
         </depend>
-        <javac srcdir="${src.main.java.dir}" destdir="${build.classes.dir}" source="1.6" target="1.6" fork="true" failonerror="true" includeantruntime="false" debug="true" encoding="UTF-8">
+        <javac srcdir="${src.main.java.dir}" destdir="${build.classes.dir}" source="1.7" target="1.7" fork="true" failonerror="true" includeantruntime="false" debug="true" encoding="UTF-8">
             <classpath refid="compile-source-classpath"/>
         </javac>
     </target>
@@ -160,7 +160,7 @@
         <depend srcdir="${src.test.java.dir}" destdir="${build.test.classes.dir}" cache="${build.temp.dir}" closure="true">
             <include name= "**/*.java"/>
         </depend>
-        <javac srcdir="${src.test.java.dir}" destdir="${build.test.classes.dir}" source="1.6" target="1.6" fork="true" failonerror="true" includeantruntime="false" debug="true" encoding="UTF-8">
+        <javac srcdir="${src.test.java.dir}" destdir="${build.test.classes.dir}" source="1.7" target="1.7" fork="true" failonerror="true" includeantruntime="false" debug="true" encoding="UTF-8">
             <classpath refid="compile-tests-classpath"/>
         </javac>
     </target>
