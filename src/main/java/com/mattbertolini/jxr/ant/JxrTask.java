@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Matt Bertolini
+ * Copyright 2012-2016 Matt Bertolini
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -132,9 +132,9 @@ public class JxrTask extends Task {
             ResourceUtils.copyResource(this.stylesheet, destStylesheet);
 
         } catch (IOException e) {
-            throw new BuildException("Exception while running XJR task.", e);
+            throw new BuildException("Exception while running XJR task. " + e.getMessage(), e);
         } catch (JxrException e) {
-            throw new BuildException("Exception running XJR task.", e);
+            throw new BuildException("Exception running XJR task. " + e.getMessage(), e);
         }
     }
 
